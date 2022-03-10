@@ -1,8 +1,18 @@
 variable "permission_sets" {
   description = "Map of maps containing Permission Set names as keys. See permission_sets description in README for information about map values."
-  type        = any
+  type        = map(
+    object(
+      {
+        description=optional(string),
+        managed_policies=optional(list(string)),
+        session_duration=optional(string),
+        tags=optional(map(string)),
+        inline_policy=optional(string)
+      }
+    )
+  )
   default = {
-    AdministratorAccess = {
+    "AdministratorAccess" = {
       description      = "Provides full access to AWS services and resources.",
       session_duration = "PT2H",
       managed_policies = ["arn:aws:iam::aws:policy/AdministratorAccess"]
