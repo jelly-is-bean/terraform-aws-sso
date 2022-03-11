@@ -4,7 +4,7 @@ variable "permission_sets" {
     object(
       {
         description=optional(string),
-        managed_policies=optional(list(string)),
+        managed_policies=list(string),
         session_duration=optional(string),
         tags=optional(map(string)),
         inline_policy=optional(string)
