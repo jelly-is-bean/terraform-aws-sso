@@ -11,7 +11,7 @@ resource "aws_ssoadmin_permission_set" "this" {
 }
 
 resource "aws_ssoadmin_permission_set_inline_policy" "this" {
-  for_each = { for ps_name, ps_attrs in var.permission_sets : ps_name => ps_attrs if can(ps_attrs.inline_policy) }
+  for_each = { for ps_name, ps_attrs in var.permission_sets : ps_name => ps_attrs if can(ps_attrs.inline_policy) && ps_attrs.inline_policy != null }
 
   inline_policy      = each.value.inline_policy
   instance_arn       = local.ssoadmin_instance_arn
