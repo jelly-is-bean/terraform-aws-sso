@@ -10,12 +10,18 @@ locals {
       } if can(ps_attrs.managed_policies)
     ]
   ])
+
+  all_available_permission_sets = merge(
+    data.aws_ssoadmin_permission_set.defaults,
+    aws_ssoadmin_permission_set.this
+  )
+
   account_assignments = flatten([
     for assignment in var.account_assignments : [
       for account_id in assignment.account_ids : {
         principal_name = assignment.principal_name
         principal_type = assignment.principal_type
-        permission_set = aws_ssoadmin_permission_set.this[assignment.permission_set]
+        permission_set = local.all_available_permission_sets[assignment.permission_set]
         account_id     = account_id
       }
     ]
