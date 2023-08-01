@@ -3,9 +3,7 @@ locals {
     "AWSPowerUserAccess",
     "AWSReadOnlyAccess",
     "AWSAdministratorAccess",
-    "AWSServiceCatalogAdminFullAccess",
-    "AWSOrganizationsFullAccess",
-    "AWSServiceCatalogEndUserAccess"
+    "AWSOrganizationsFullAccess"
   ])
 }
 
