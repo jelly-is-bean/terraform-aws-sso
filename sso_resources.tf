@@ -10,6 +10,19 @@ resource "aws_ssoadmin_permission_set" "this" {
   tags             = lookup(each.value, "tags", {})
 }
 
+resource "aws_ssoadmin_permissions_boundary_attachment" "this" {
+  for_each = {for key,permission_set in var.permission_sets: key => permission_set if permission_set.boundary_customer != null}
+
+  instance_arn = local.ssoadmin_instance_arn
+  permission_set_arn = aws_ssoadmin_permission_set.this[each.key].arn
+  permissions_boundary {
+    customer_managed_policy_reference {
+      name = each.value.boundary_customer
+      path = "/"
+    }
+  }
+}
+
 resource "aws_ssoadmin_permission_set_inline_policy" "this" {
   for_each = { for ps_name, ps_attrs in var.permission_sets : ps_name => ps_attrs if can(ps_attrs.inline_policy) && ps_attrs.inline_policy != null }
 

@@ -12,6 +12,7 @@ variable "permission_sets" {
         session_duration=optional(string),
         tags=optional(map(string)),
         inline_policy=optional(string)
+        boundary_customer=optional(string)
       }
     )
   )
