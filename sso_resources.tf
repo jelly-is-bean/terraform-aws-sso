@@ -18,7 +18,7 @@ resource "aws_ssoadmin_permissions_boundary_attachment" "this" {
   permissions_boundary {
     customer_managed_policy_reference {
       name = each.value.boundary_customer
-      path = "/"
+      path = "/boundaries/"
     }
   }
 }
