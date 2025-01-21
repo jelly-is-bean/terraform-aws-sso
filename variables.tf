@@ -1,6 +1,6 @@
-terraform {
-  experiments = [module_variable_optional_attrs]
-}
+# terraform {
+#   experiments = [module_variable_optional_attrs]
+# }
 
 variable "permission_sets" {
   description = "Map of maps containing Permission Set names as keys. See permission_sets description in README for information about map values."
